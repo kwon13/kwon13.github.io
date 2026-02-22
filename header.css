@@ -1,0 +1,47 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line, #dcd6cc);
+}
+
+.brand {
+  color: var(--text, #2f2d29);
+  text-decoration: none;
+  font-family: "Newsreader", "Times New Roman", serif;
+  font-weight: 600;
+  font-size: 1.15rem;
+  letter-spacing: 0.01em;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.site-nav a {
+  color: var(--muted, #6f6a62);
+  text-decoration: none;
+  font-family: "Newsreader", "Times New Roman", serif;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.site-nav a:hover,
+.site-nav a.is-current {
+  color: var(--text, #2f2d29);
+}
+
+@media (max-width: 760px) {
+  .topbar {
+    flex-wrap: wrap;
+    padding: 0.85rem 0;
+  }
+
+  .site-nav {
+    gap: 0.72rem;
+  }
+}

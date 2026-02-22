@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The Expansion Statement by Yonghoon Kwon">
+  <title>Yonghoon Kwon | The Expansion Statement</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="header.css">
+  <link rel="stylesheet" href="statement.css">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["\\(", "\\)"]]
+      },
+      svg: {
+        fontCache: "global"
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <header data-shared-header data-current="statement"></header>
+
+  <main class="container" id="top">
+    <div class="lang-switch" role="group" aria-label="Language toggle">
+      <button type="button" class="lang-btn is-active" data-lang-btn="en" aria-pressed="true">En</button>
+      <button type="button" class="lang-btn" data-lang-btn="ko" aria-pressed="false">Ko</button>
+    </div>
+
+    <div id="statement-content-en" class="lang-panel">
+    <section class="section" id="statement" aria-labelledby="statement-title">
+      <h2 id="statement-title">Research Statement</h2>
+
+      <p>In the real world, tasks are not fixed problem-solving exercises. Goals and constraints shift mid-work, necessary information is revealed only through interaction, and criteria for success often become clear only after failure. True competence, therefore, is not just the ability to solve a given problem, but the ability to keep moving forward while <strong>updating the specification (spec) that defines the problem itself to match reality</strong>. I believe many of today&apos;s systems are rapidly improving at "producing correct answers," but remain relatively weak at "continuing to make progress in a world where the definition of correctness keeps changing."</p>
+
+      <p id="paradox-anchor">This cannot be solved simply by "stronger optimization." In complex settings, we repeatedly observe the opposite paradox: the more clearly we define a goal and the more directly we optimize it, the harder search becomes. I call this the <strong>paradox of search</strong>. Pushing hard on a single scalar objective (reward/loss) rapidly shrinks the search space. In environments with sparse or deceptive rewards, signals that seem to indicate "getting closer" can block essential detours and cause search to fail altogether. A classic example is the Hard Maze family: if we optimize only the reduction of distance to the goal, the agent gets trapped in a local optimum and never discovers the true path. The performance curve rises while the path to the solution disappears.</p>
+
+      <figure id="deceptive-maze" class="viz-card" aria-labelledby="deceptive-maze-title" data-deceptive-maze>
+        <figcaption class="viz-head">
+          <h3 id="deceptive-maze-title">The Deceptive Maze</h3>
+          <p>Compare single-objective optimization against novelty-seeking search on the same hard map.</p>
+        </figcaption>
+
+        <div class="maze-split-labels" aria-hidden="true">
+          <span>\(\max_a\mathbb{E}[r(a)]\)</span>
+          <span>\(\max_a \mathbb{E}[\mathrm{Novelty}(a)]\)</span>
+        </div>
+
+        <canvas id="deceptive-maze-canvas" data-deceptive-maze-canvas aria-label="Deceptive maze simulation"></canvas>
+
+        <div class="maze-controls" role="group" aria-label="Maze simulation controls">
+          <button id="mode-reset" data-maze-reset type="button">Reset Simulation</button>
+        </div>
+
+        <p id="maze-status" data-maze-status aria-live="polite">Loading simulation...</p>
+
+        <ul class="maze-legend" aria-label="Legend">
+          <li><span class="chip exploit"></span>Exploitation trajectory</li>
+          <li><span class="chip explore"></span>Exploration trajectory</li>
+          <li><span class="chip expansion"></span>Escaped agents</li>
+        </ul>
+      </figure>
+
+      <p>Evolution in nature makes the lesson clearer. It did not converge to a predefined terminal goal; instead, through repeated variation and selection, it continuously generated new functions and structures by <strong>maintaining diversity</strong>. But diversity alone is not sufficient. If we increase variation indiscriminately, search becomes noisy and progress fails to accumulate. What matters is having a discipline that <strong>does not treat the goal as a fixed endpoint, while still preventing search from collapsing</strong>. In the history of science and technology, breakthroughs often did not come from pushing the original objective harder, but from <strong>goal switching</strong>, where newly discovered concepts and representations replaced or expanded the original goal.</p>
+
+      <h3 class="block-title">Expansion: A Bridge Between Exploitation and Exploration</h3>
+
+      <p>Existing approaches tend to converge to two extremes.</p>
+
+      <p><strong>Exploitation</strong> compresses performance within a closed distribution: better optimization, tighter rewards, higher difficulty. It is powerful, but becomes fragile the moment it relies on the assumption that the problem definition is stable. As complexity increases, direct optimization of a single objective shrinks search, blocks essential detours, and in sparse or deceptive reward environments, easily traps the system in local optima.</p>
+
+      <p>In contrast, <strong>Exploration</strong> produces novelty. It searches an open task space and generates new variations. Breadth can increase, but if the structure is weak, variations do not accumulate, plausible-looking behavior is mistaken for progress, and the system becomes easily distracted. Diversity is preserved, but when selection pressure is vague, "movement" replaces "development."</p>
+
+      <p id="expansion-middle-anchor">What I focus on is the missing middle: <strong>Expansion</strong>.</p>
+
+      <div class="expansion-inline">
+        <figure id="expansion-bridge" class="viz-card bridge-card animate-once" aria-labelledby="expansion-bridge-title" data-expansion-bridge>
+          <figcaption class="viz-head">
+            <h3 id="expansion-bridge-title">The Expansion Bridge</h3>
+            <p>The missing middle where both fronts touch and are reorganized.</p>
+          </figcaption>
+
+          <div class="bridge-axis" role="img" aria-label="Experience-time space with exploitation, exploration, and expansion regions">
+            <span class="axis-label axis-y">Experience</span>
+            <span class="axis-label axis-x">Time</span>
+            <div class="bridge-stage stage-exploitation">Exploitation</div>
+            <div class="bridge-stage stage-exploration">Exploration</div>
+            <div class="bridge-stage stage-expansion">Expansion</div>
+          </div>
+        </figure>
+
+        <div class="expansion-inline-copy">
+          <p>Expansion is neither "solving better" nor "wandering more." Expansion is a framework that expands <strong>what should be solved</strong> - the space of problems/specifications/constraints - <strong>grounded in reality</strong>. Here, the model is not merely a solver; it becomes an agent that redefines the problem through observation, rearranges constraints, and restructures goals. The core is not unconstrained imagination, but the ability to update the spec by learning from collisions with reality. As Feynman said, no matter how plausible an explanation sounds, if it does not match reality, it must be discarded. Expansion also means not leaving "goal switching" as a random accident, but <strong>systematically creating room for goals/specs to be reconfigured by real feedback</strong>.</p>
+        </div>
+      </div>
+
+      <p>The "mismatch with reality" here is not a vague slogan - it is defined as signals the system can observe. For example, <strong>execution failure (errors/timeouts), explicit constraint violations, performance degradation after spec changes, and inferiority relative to alternative trajectories</strong> can quantify mismatch, and these signals steer the next search and update. Expansion can persist only under a discipline where not "plausible narratives," but <strong>verifiable mismatches</strong> determine what to try next.</p>
+
+      <p>Under this view, the generalization I want is <strong>continuity under drift</strong>. That is: when specs change, constraints tighten, and success criteria are redefined, can the system keep its learning and reasoning aligned while expanding the problem space? Expansion is the language for designing that ability.</p>
+
+      <p>Ultimately, I aim to improve performance in interactive agent settings such as SWE-style software engineering environments and Pokemon, where success is not a single-shot answer but requires <strong>a wide action space and sustained progress over long trajectories</strong>. My interest is not in systems that win games with fixed rules, but in systems that survive by <strong>updating problem definitions</strong> in a world where the rules keep changing. If exploitation is the technique of climbing the same mountain faster, and exploration is the courage to walk beyond the map, then expansion is the ability to <strong>redraw the map using reality as the reference</strong>. I want to make this redrawing not a one-off intuition, but a <strong>repeatable procedure</strong>.</p>
+    </section>
+
+    <section class="section" id="looking-ahead" aria-labelledby="looking-ahead-title">
+      <h2 id="looking-ahead-title">Looking Ahead</h2>
+
+      <p id="ahead-anchor">Therefore, my research aims to implement <strong>expansion</strong> as a self-evolving loop, ensuring that this loop is steered not by plausibility, but by <strong>mismatch with reality and verifiability</strong>. This loop is not a single technique, but is composed of three complementary axes operating simultaneously at different levels of the learning system.</p>
+
+      <div class="loop-inline">
+        <figure id="self-evolving-loop" class="viz-card loop-card" aria-labelledby="loop-title" data-self-evolving-loop>
+          <figcaption class="viz-head">
+            <h3 id="loop-title">Evolving Loop</h3>
+            <p>A triangular cycle where architecture, algorithm, and environment continuously reinforce one another.</p>
+          </figcaption>
+
+          <svg id="loop-svg" viewBox="0 0 360 260" role="img" aria-label="Rounded triangular self-evolving loop with architecture, algorithm, and environment">
+            <defs>
+              <linearGradient id="loop-gradient" x1="16%" y1="8%" x2="88%" y2="92%">
+                <stop offset="0%" stop-color="#2e77d0"></stop>
+                <stop offset="52%" stop-color="#4f9a6f"></stop>
+                <stop offset="100%" stop-color="#e79b2f"></stop>
+              </linearGradient>
+              <filter id="loop-runner-glow" x="-70%" y="-70%" width="240%" height="240%">
+                <feGaussianBlur stdDeviation="2.2" result="blur"></feGaussianBlur>
+                <feMerge>
+                  <feMergeNode in="blur"></feMergeNode>
+                  <feMergeNode in="SourceGraphic"></feMergeNode>
+                </feMerge>
+              </filter>
+            </defs>
+
+            <path id="loop-cycle" class="loop-track" d="M180 54 Q117 114 102 190 Q180 210 258 190 Q243 114 180 54 Z"></path>
+            <path class="loop-edge edge-cycle" d="M180 54 Q117 114 102 190 Q180 210 258 190 Q243 114 180 54 Z"></path>
+
+            <circle class="loop-runner-static" cx="180" cy="54" r="5"></circle>
+            <circle class="loop-runner" r="5" filter="url(#loop-runner-glow)">
+              <animateMotion dur="3.2s" repeatCount="indefinite" rotate="auto">
+                <mpath href="#loop-cycle"></mpath>
+              </animateMotion>
+            </circle>
+
+            <circle class="loop-node node-observe" cx="180" cy="54" r="8"></circle>
+            <circle class="loop-node node-propose" cx="102" cy="190" r="8"></circle>
+            <circle class="loop-node node-update" cx="258" cy="190" r="8"></circle>
+
+            <text class="loop-label label-observe" x="180" y="30">Architecture</text>
+            <text class="loop-label label-propose" x="96" y="224">Algorithm</text>
+            <text class="loop-label label-update" x="264" y="224">Environment</text>
+          </svg>
+        </figure>
+
+        <ol class="focus-list">
+          <li>
+            <strong>Meta-learned architectures:</strong> Rather than assuming a fixed network structure, the model&apos;s architecture itself becomes part of the search and adaptation process. Inspired by neuroevolution and neural architecture search, structural components can be progressively reconfigured and expanded throughout learning.
+          </li>
+          <li>
+            <strong>Meta-learning algorithms:</strong> Instead of treating the learning algorithm as a fixed external procedure, update rules and learning strategies are incorporated into the search process. In other words, the model is designed to observe its own learning dynamics and progressively discover and adapt more efficient update mechanisms.
+          </li>
+          <li>
+            <strong>Open-ended generative learning environments:</strong> Rather than relying on a predefined problem distribution, the system is designed to generate new environments and tasks on its own. This enables the learning space to expand progressively beyond a fixed data distribution.
+          </li>
+        </ol>
+      </div>
+
+      <p>The common goal of these three axes is to ensure that learning does not remain confined to optimizing model parameters alone. By incorporating structure, update rules, and environments into the processes of variation and selection, the ultimate objective is to build an open-ended learning system that does not converge to a fixed problem set, but continually expands itself.</p>
+    </section>
+    </div>
+
+    <div id="statement-content-ko" class="lang-panel" lang="ko" hidden>
+      <section class="section" id="statement-ko" aria-labelledby="statement-ko-title">
+        <h2 id="statement-ko-title">Research Statement</h2>
+
+        <p>현실에서 과제는 고정된 문제풀이가 아닙니다. 목표와 제약은 작업 도중에 변하고, 필요한 정보는 상호작용을 통해서만 드러나며, 성공의 기준은 종종 실패 이후에야 명확해집니다. 따라서 유능함은 주어진 문제를 해결하는 능력을 넘어, <strong>문제를 규정하는 명세(spec) 자체를 현실에 맞게 갱신하면서도 전진하는 능력</strong>이어야 합니다. 저는 오늘날 많은 시스템이 &quot;정답을 내는 능력&quot;은 빠르게 키우는 반면, &quot;정답의 정의가 바뀌는 세계에서 계속 전진하는 능력&quot;은 상대적으로 약하다고 생각합니다.</p>
+
+        <p>이 문제는 단지 &quot;더 강한 최적화가 필요하다&quot;로 해결되지 않습니다. 오히려 복잡한 문제에서는 반대의 역설이 반복적으로 관측됩니다. 목표를 더 명확히 정의하고, 그 목표를 더 직접적으로 최적화할수록 탐색이 오히려 어려워지는 현상-저는 이를 <strong>탐색의 역설</strong>로 봅니다. 단일한 스칼라 목표(보상/손실)를 강하게 밀어붙이는 최적화는 탐색 공간을 빠르게 수축시키며, 특히 보상이 희소하거나 기만적인 환경에서는 &quot;가까워지는 것처럼 보이는&quot; 신호가 필수적인 우회 경로를 차단해 탐색 자체를 실패로 이끌 수 있습니다. Hard Maze 유형의 문제에서 목표까지의 거리 감소만 최적화하면 국소 최적점에 갇혀 실제 경로를 끝내 발견하지 못하는 일이 대표적입니다.</p>
+
+        <figure id="deceptive-maze-ko" class="viz-card" aria-labelledby="deceptive-maze-title-ko" data-deceptive-maze>
+          <figcaption class="viz-head">
+            <h3 id="deceptive-maze-title-ko">The Deceptive Maze</h3>
+            <p>Compare single-objective optimization against novelty-seeking search on the same hard map.</p>
+          </figcaption>
+
+          <div class="maze-split-labels" aria-hidden="true">
+            <span>\(\max_a\mathbb{E}[r(a)]\)</span>
+            <span>\(\max_a \mathbb{E}[\mathrm{Novelty}(a)]\)</span>
+          </div>
+
+          <canvas id="deceptive-maze-canvas-ko" data-deceptive-maze-canvas aria-label="Deceptive maze simulation (Korean view)"></canvas>
+
+          <div class="maze-controls" role="group" aria-label="Maze simulation controls (Korean view)">
+            <button id="mode-reset-ko" data-maze-reset type="button">Reset Simulation</button>
+          </div>
+
+          <p id="maze-status-ko" data-maze-status aria-live="polite">Loading simulation...</p>
+
+          <ul class="maze-legend" aria-label="Legend">
+            <li><span class="chip exploit"></span>Exploitation trajectory</li>
+            <li><span class="chip explore"></span>Exploration trajectory</li>
+            <li><span class="chip expansion"></span>Escaped agents</li>
+          </ul>
+        </figure>
+
+        <p>자연의 진화가 주는 힌트는 여기서 분명합니다. 진화는 특정한 종료 목표에 수렴하지 않았고, 다양한 변이와 선택의 반복 속에서 <strong>다양성을 유지</strong>함으로써 새로운 기능과 구조를 지속적으로 생성해왔습니다. 그러나 다양성만으로 충분하지 않습니다. 변이를 무작정 늘리면 산만해지고, 진전은 축적되지 않습니다. 결국 중요한 것은 <strong>목표를 고정된 종착점으로 두지 않으면서도 탐색이 붕괴하지 않게 만드는 규율</strong>입니다. 기술과 과학의 역사에서도 돌파구는 종종 기존 목표를 더 세게 밀어붙여서가 아니라, 탐색 도중 발견된 새로운 개념·표현이 목표를 대체하거나 확장하는 <strong>goal switching</strong>을 통해 나타났습니다.</p>
+
+        <h3 class="block-title">Expansion: A Bridge Between Exploitation and Exploration</h3>
+
+        <p>기존 접근은 대체로 두 가지 극단으로 수렴합니다.</p>
+
+        <p><strong>Exploitation</strong>은 닫힌 분포 안에서 성능을 압축합니다. 더 좋은 최적화, 더 촘촘한 보상, 더 높은 난이도. 강력하지만, 문제 정의가 안정적이라는 가정에 기대는 순간 취약해집니다. 복잡도가 높아질수록 단일 목표에 대한 직접 최적화는 탐색을 수축시키고, 필수적인 우회 경로를 차단하며, 기만적 보상이나 희소 보상 환경에서는 국소 최적점에 갇히기 쉽습니다.</p>
+
+        <p>반대로 <strong>Exploration</strong>은 새로움을 만듭니다. 열린 과제 공간을 탐색하며 새로운 변이를 생성합니다. 넓이는 늘 수 있지만, 구조가 약하면 변이는 축적되지 않고, 그럴듯함이 진전으로 오인되며, 시스템은 쉽게 산만해집니다. 다양성은 유지되는데 선택 압력이 흐릿하면 &quot;움직임&quot;이 &quot;발전&quot;을 대체하게 됩니다.</p>
+
+        <p>제가 집중하는 것은 그 사이의 빈칸, <strong>Expansion</strong>입니다.</p>
+
+        <div class="expansion-inline">
+          <figure id="expansion-bridge-ko" class="viz-card bridge-card animate-once" aria-labelledby="expansion-bridge-title-ko" data-expansion-bridge>
+            <figcaption class="viz-head">
+              <h3 id="expansion-bridge-title-ko">The Expansion Bridge</h3>
+              <p>The missing middle where both fronts touch and are reorganized.</p>
+            </figcaption>
+
+            <div class="bridge-axis" role="img" aria-label="Experience-time space with exploitation, exploration, and expansion regions">
+              <span class="axis-label axis-y">Experience</span>
+              <span class="axis-label axis-x">Time</span>
+              <div class="bridge-stage stage-exploitation">Exploitation</div>
+              <div class="bridge-stage stage-exploration">Exploration</div>
+              <div class="bridge-stage stage-expansion">Expansion</div>
+            </div>
+          </figure>
+
+          <div class="expansion-inline-copy">
+            <p>Expansion은 &quot;더 잘 푸는 것&quot;도, &quot;더 많이 떠도는 것&quot;도 아닙니다. Expansion은 <strong>무엇을 풀어야 하는지-문제/명세/제약의 공간 자체를-현실에 근거해 확장하는 체계</strong>입니다. 여기서 모델은 단순한 Solver가 아니라, 관찰을 통해 문제를 재정의하고, 제약을 재배치하며, 목표를 재구조화하는 존재가 되어야 합니다. 핵심은 자유로운 상상력이 아니라 <strong>현실과의 충돌에서 배워 명세를 업데이트하는 능력</strong>입니다. 아무리 그럴듯한 설명이라도 현실과 맞지 않으면 버려져야 한다고 파인만은 이야기합니다. Expansion은 곧 &quot;goal switching&quot;을 무작위 사건으로 남겨두지 않고, <strong>현실 피드백에 의해 목표/명세가 재구성될 수 있도록</strong> 시스템적으로 여지를 만드는 방식이기도 합니다.</p>
+          </div>
+        </div>
+
+        <p>여기서 말하는 &quot;현실과의 불일치&quot;는 추상적 구호가 아니라, 시스템이 관측할 수 있는 신호로 정의됩니다. 예를 들어 <strong>실행 실패(에러/시간초과), 명시적 제약 위반, 스펙 변경 후 성능 저하, 대안 궤적 대비 열등함</strong> 같은 피드백은 불일치를 정량화할 수 있으며, 이 신호가 다음 탐색과 업데이트를 조향합니다. Expansion은 결국 &quot;그럴듯한 서사&quot;가 아니라, <strong>검증 가능한 불일치가 다음 탐색을 결정하게 만드는 규율</strong> 위에서만 지속됩니다.</p>
+
+        <p>이 관점에서 제가 원하는 것은 <strong>드리프트 하에서의 연속성</strong>입니다. 즉, 스펙이 바뀌고 제약이 강화되고 성공 기준이 재정의될 때도, 시스템이 학습과 추론의 방향을 잃지 않고 문제 공간을 넓혀갈 수 있는가. Expansion은 바로 그 능력을 설계하는 언어라고 봅니다.</p>
+
+        <p>궁극적으로 저는 SWE 스타일 소프트웨어 엔지니어링 환경이나 Pokemon 같은 상호작용형 에이전트 과제처럼, 단발 정답이 아니라 <strong>행동 공간이 넓고 긴 궤적에서의 지속적 진전</strong>이 요구되는 설정에서 성능을 끌어올리고자 합니다. 제 관심사는 고정된 규칙의 게임에서 이기는 모델이 아니라, 규칙이 바뀌는 세계에서 <strong>문제 정의를 갱신하며 살아남는 시스템</strong>입니다. Exploitation이 같은 산을 더 빠르게 오르는 기술이라면, exploration은 지도를 벗어나 걷는 용기라고 생각합니다. 제가 말하는 expansion은 그 둘 사이에서, <strong>현실을 기준으로 지도를 다시 그리는 능력</strong>이고, 저는 그 재도작성을 일회성 직관이 아니라 <strong>반복 가능한 절차</strong>로 만들고 싶습니다.</p>
+      </section>
+
+      <section class="section" id="looking-ahead-ko" aria-labelledby="looking-ahead-ko-title">
+        <h2 id="looking-ahead-ko-title">Looking Ahead</h2>
+
+        <p>따라서 제 연구는 expansion을 <strong>자기진화 루프</strong>로 구현하고, 그 루프가 &quot;그럴듯함&quot;이 아니라 <strong>현실의 불일치와 검증 가능성</strong>에 의해 조향되도록 만드는 데 초점을 둡니다. 이 루프는 단일 기법이 아니라, 학습 시스템의 서로 다른 층위에서 동시에 작동하는 세 가지 축으로 구성됩니다.</p>
+
+        <div class="loop-inline">
+          <figure id="self-evolving-loop-ko" class="viz-card loop-card" aria-labelledby="loop-title-ko" data-self-evolving-loop>
+            <figcaption class="viz-head">
+              <h3 id="loop-title-ko">Evolving Loop</h3>
+              <p>A triangular cycle where architecture, algorithm, and environment continuously reinforce one another.</p>
+            </figcaption>
+
+            <svg id="loop-svg-ko" viewBox="0 0 360 260" role="img" aria-label="Rounded triangular self-evolving loop with architecture, algorithm, and environment">
+              <defs>
+                <linearGradient id="loop-gradient-ko" x1="16%" y1="8%" x2="88%" y2="92%">
+                  <stop offset="0%" stop-color="#2e77d0"></stop>
+                  <stop offset="52%" stop-color="#4f9a6f"></stop>
+                  <stop offset="100%" stop-color="#e79b2f"></stop>
+                </linearGradient>
+                <filter id="loop-runner-glow-ko" x="-70%" y="-70%" width="240%" height="240%">
+                  <feGaussianBlur stdDeviation="2.2" result="blur"></feGaussianBlur>
+                  <feMerge>
+                    <feMergeNode in="blur"></feMergeNode>
+                    <feMergeNode in="SourceGraphic"></feMergeNode>
+                  </feMerge>
+                </filter>
+              </defs>
+
+              <path id="loop-cycle-ko" class="loop-track" d="M180 54 Q117 114 102 190 Q180 210 258 190 Q243 114 180 54 Z"></path>
+              <path class="loop-edge" d="M180 54 Q117 114 102 190 Q180 210 258 190 Q243 114 180 54 Z" style="stroke: url(#loop-gradient-ko);"></path>
+
+              <circle class="loop-runner-static" cx="180" cy="54" r="5"></circle>
+              <circle class="loop-runner" r="5" filter="url(#loop-runner-glow-ko)">
+                <animateMotion dur="3.2s" repeatCount="indefinite" rotate="auto">
+                  <mpath href="#loop-cycle-ko"></mpath>
+                </animateMotion>
+              </circle>
+
+              <circle class="loop-node node-observe" cx="180" cy="54" r="8"></circle>
+              <circle class="loop-node node-propose" cx="102" cy="190" r="8"></circle>
+              <circle class="loop-node node-update" cx="258" cy="190" r="8"></circle>
+
+              <text class="loop-label label-observe" x="180" y="30">Architecture</text>
+              <text class="loop-label label-propose" x="96" y="224">Algorithm</text>
+              <text class="loop-label label-update" x="264" y="224">Environment</text>
+            </svg>
+          </figure>
+
+          <ol class="focus-list">
+            <li>
+              <strong>Meta-learned architectures:</strong> 고정된 네트워크 구조를 전제로 하지 않고, 모델의 아키텍처 자체를 탐색과 적응의 대상에 포함시킨다. Neuroevolution이나 Neural Architecture Search와 같이 구조적 구성요소가 학습 과정에서 점진적으로 재구성·확장될 수 있도록 한다.
+            </li>
+            <li>
+              <strong>Meta-learning algorithms:</strong> 학습 알고리즘을 고정된 외부 규칙으로 두지 않고, 업데이트 규칙과 학습 전략을 탐색의 일부로 포함시킨다. 즉, 모델이 자신의 학습 과정을 관찰하고, 더 효율적인 업데이트 방식을 점진적으로 발견·적응하도록 설계한다.
+            </li>
+            <li>
+              <strong>Open-ended generative learning environments:</strong> 사전에 정의된 문제 분포에 의존하지 않고, 시스템이 스스로 새로운 환경과 과제를 생성하도록 설계한다. 이를 통해 고정된 데이터 분포를 넘어 학습 공간을 점진적으로 확장한다.
+            </li>
+          </ol>
+        </div>
+
+        <p>이 세 축의 공통된 목표는 학습의 대상이 단순히 모델의 파라미터에 머무르지 않도록 만드는 것입니다. 구조, 규칙, 환경을 모두 탐색과 선택의 과정에 포함시킴으로써, 시스템이 고정된 문제 집합에 수렴하지 않고 스스로 확장하는 open-ended 학습 체계를 구축하는 것이 궁극적인 방향입니다.</p>
+      </section>
+    </div>
+
+  </main>
+
+  <footer class="container footer">
+    <p>&copy; 2026 Yonghoon Kwon</p>
+  </footer>
+
+  <script src="header.js"></script>
+  <script src="statement-lang.js"></script>
+  <script src="statement.js"></script>
+</body>
+</html>
