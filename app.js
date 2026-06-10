@@ -941,17 +941,16 @@
 
   const DEFAULT_POSTS = [
     {
-      title: "Evolve, Verify, Solve: Stabilizing Frontier Co-evolution for Code Tasks",
-      description: "Anchored Frontier Evolution",
-      endDate: "Ongoing",
-      url: "https://www.notion.so/fiveflow/AI-with-Recursive-Self-Improvement-3014cec6dd27806e8393c923803ea67e?source=copy_link",
+      title: "EvoX: Meta-Evolution for Automated Discovery",
+      description: "Paper Review",
+      endDate: "2026-04",
+      url: "https://fiveflow.notion.site/EvoX-Meta-Evolution-for-Automated-Discovery-3324cec6dd27801189d3d39a538cf0f2?pvs=74",
       cover: "",
-      disableLink: true
     },
     {
-      title: "LLM-based Evolution Strategy (Merging)",
+      title: "LLM-guided evolutionary optimization for model merging",
       description: "Language Models as Evolutionary Operators, Not Optimization Targets",
-      endDate: "2024-10-21",
+      endDate: "2024-12-17",
       url: "https://fiveflow.notion.site/LLM-based-Evolution-Strategy-Merging-1254cec6dd278041a7f6c07dc4039fe8",
       cover: ""
     },
@@ -1158,23 +1157,6 @@
     return posts.slice(0, maxPosts);
   }
 
-  function formatDate(value) {
-    if (!value) {
-      return "Draft";
-    }
-
-    const parsed = new Date(value);
-    if (Number.isNaN(parsed.getTime())) {
-      return value;
-    }
-
-    return new Intl.DateTimeFormat("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric"
-    }).format(parsed);
-  }
-
   function createBlogCard(post) {
     const hasExternal = !post.disableLink && typeof post.url === "string" && /^https?:\/\//i.test(post.url);
     const card = document.createElement(hasExternal ? "a" : "article");
@@ -1201,13 +1183,8 @@
     desc.className = "blog-desc";
     desc.textContent = post.description || "Description will be added.";
 
-    const end = document.createElement("p");
-    end.className = "blog-end";
-    end.textContent = `종료일: ${formatDate(post.endDate || "TBD")}`;
-
     body.appendChild(title);
     body.appendChild(desc);
-    body.appendChild(end);
     card.appendChild(body);
 
     return card;
@@ -1336,7 +1313,6 @@
 
   async function initBlogSection() {
     const grid = document.getElementById("blog-grid");
-    const expandButton = document.getElementById("blog-expand-btn");
     if (!grid) {
       return;
     }
@@ -1368,42 +1344,29 @@
       return;
     }
 
-    const initialVisibleCount = 2;
-    const hasExpandableList = posts.length > initialVisibleCount;
-    let expanded = false;
+    for (let i = 0; i < posts.length; i += 1) {
+      grid.appendChild(createBlogCard(posts[i]));
+    }
 
-    const renderVisiblePosts = () => {
-      grid.innerHTML = "";
+    if (posts.length > 2) {
+      const syncScrollHeight = () => {
+        const secondCard = grid.querySelectorAll(".blog-card")[1];
+        if (!secondCard) {
+          return;
+        }
 
-      const visibleCount = hasExpandableList && !expanded ? initialVisibleCount : posts.length;
-      const visiblePosts = posts.slice(0, visibleCount);
-
-      for (let i = 0; i < visiblePosts.length; i += 1) {
-        grid.appendChild(createBlogCard(visiblePosts[i]));
-      }
-
-      if (!expandButton) {
-        return;
-      }
-
-      if (!hasExpandableList) {
-        expandButton.hidden = true;
-        return;
-      }
-
-      expandButton.hidden = false;
-      expandButton.classList.toggle("is-expanded", expanded);
-      expandButton.setAttribute("aria-expanded", expanded ? "true" : "false");
-      expandButton.setAttribute("aria-label", expanded ? "Collapse posts" : "Expand posts");
-    };
-
-    renderVisiblePosts();
-
-    if (expandButton) {
-      expandButton.onclick = () => {
-        expanded = !expanded;
-        renderVisiblePosts();
+        grid.style.removeProperty("--blog-scroll-height");
+        const scrollHeight = secondCard.offsetTop + secondCard.offsetHeight;
+        grid.style.setProperty("--blog-scroll-height", `${Math.ceil(scrollHeight)}px`);
       };
+
+      grid.classList.add("is-scrollable");
+      syncScrollHeight();
+      window.addEventListener("resize", syncScrollHeight);
+
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(syncScrollHeight);
+      }
     }
   }
 

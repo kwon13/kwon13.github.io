@@ -161,6 +161,28 @@ strong {
   display: block;
 }
 
+.blog-grid.is-scrollable {
+  max-height: var(--blog-scroll-height);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: #bdb5a8 transparent;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+}
+
+.blog-grid.is-scrollable::-webkit-scrollbar {
+  width: 0.38rem;
+}
+
+.blog-grid.is-scrollable::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: #bdb5a8;
+}
+
+.blog-grid.is-scrollable::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 .blog-heading {
   margin-bottom: 0.42rem;
   font-size: clamp(1.4rem, 3vw, 1.78rem);
@@ -206,59 +228,12 @@ strong {
   line-height: 1.56;
 }
 
-.blog-end {
-  margin: 0.48rem 0 0;
-  color: #5f5a50;
-  font-size: 0.8rem;
-}
-
 .blog-empty {
   margin: 0;
   padding: 0.9rem;
   border: 1px dashed var(--line-strong);
   color: #59544b;
   background: #fbfaf5;
-}
-
-.blog-expand-btn {
-  margin: 0.72rem 0 0;
-  width: 100%;
-  height: 1.7rem;
-  display: block;
-  position: relative;
-  appearance: none;
-  border: 0;
-  background: transparent;
-  color: #4a463f;
-  padding: 0;
-  cursor: pointer;
-}
-
-.blog-expand-btn::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 0.74rem;
-  height: 0.46rem;
-  background: currentColor;
-  box-shadow: 0 0 0 0.42rem var(--bg);
-  clip-path: polygon(0 0, 50% 100%, 100% 0, 84% 0, 50% 62%, 16% 0);
-  transition: transform 0.2s ease;
-  transform: translate(-50%, -50%) rotate(0deg);
-}
-
-.blog-expand-btn.is-expanded::after {
-  transform: translate(-50%, -50%) rotate(180deg);
-}
-
-.blog-expand-btn:hover {
-  color: var(--blue);
-}
-
-.blog-expand-btn:focus-visible {
-  outline: 2px solid #9cb2cf;
-  outline-offset: 2px;
 }
 
 .experience-pane {
