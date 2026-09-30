@@ -2,8 +2,8 @@
 % Build with: tectonic src/MY_CV.tex
 % The name and current role appear on the left; contact details appear on the right.
 
-\documentclass[11pt,a4paper]{article}
-\usepackage[margin=0.75in]{geometry}
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=0.6in]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
@@ -20,8 +20,8 @@
 \pagenumbering{gobble}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
-\setlist[itemize]{itemsep=3pt, topsep=4pt, leftmargin=1.2em}
-\renewcommand{\arraystretch}{1.05}
+\setlist[itemize]{itemsep=1pt, topsep=2pt, parsep=0pt, leftmargin=1.2em}
+\renewcommand{\arraystretch}{1}
 
 \definecolor{cvaccent}{HTML}{1F4E79}
 \hypersetup{
@@ -34,7 +34,7 @@
 }
 
 \titleformat{\section}{\large\bfseries}{}{0pt}{}[\titlerule]
-\titlespacing*{\section}{0pt}{10pt}{6pt}
+\titlespacing*{\section}{0pt}{7pt}{3pt}
 \newcommand{\sectionheading}[1]{\section*{#1}}
 
 % Macro for entries in work experience
@@ -61,12 +61,7 @@ MLAI Lab, Yonsei University & \href{https://linkedin.com/in/yonghoon-kwon-74b724
 I began my career as an ML Researcher at Glorang at the age of 19 and later worked at Selectstar. I am now a Research Intern at Yonsei University's MLAI Lab, studying self-evolving systems. I explore ``Expansion'', a framework in which AI models learn to redefine and restructure their own task specifications through real-world interactions.
 
 \sectionheading{Research Interests}
-\begin{itemize}
-    \item Small language models and efficient reasoning
-    \item Open-ended self-evolving LLMs
-    \item Meta-learning architectures
-    \item Adaptive evaluation
-\end{itemize}
+Small language models and efficient reasoning; open-ended self-evolving LLMs; meta-learning architectures; adaptive evaluation.
 
 \sectionheading{Publications}
 \begin{itemize}
@@ -76,7 +71,6 @@ I began my career as an ML Researcher at Glorang at the age of 19 and later work
     \item Sunguk Choi, \textbf{Yonghoon Kwon}\ (Co-first author), Dongjin Seo. ``Context- and Alignment-Based Speech--Text Fusion Model for Sentiment Analysis.'' \emph{Proceedings of KCC 2023} (Korean Computer Science Conference).
 \end{itemize}
 
-\newpage
 \sectionheading{Work Experience}
 \cventry{Yonsei University, Seoul, South Korea}{May~2026 -- Present}{Research Intern, MLAI}{%
 \begin{itemize}
@@ -102,8 +96,7 @@ I began my career as an ML Researcher at Glorang at the age of 19 and later work
 
 \sectionheading{Awards \& Honors}
 \begin{itemize}
-    \item Bronze Medal, \textit{4th Korean Emotion Recognition Competition}\\
-    Chonnam National University (Oct~2022)
+    \item Bronze Medal, \textit{4th Korean Emotion Recognition Competition}, Chonnam National University (Oct~2022)
     \item 3rd Place, \textit{AI Grand Challenge -- Open Track}, AGC (Aug~2023)
     \item Stage~2 Winner (Policy Support~AI), \textit{AI Grand Challenge}, IITP Director's Award, AGC (Nov~2023)
 \end{itemize}
