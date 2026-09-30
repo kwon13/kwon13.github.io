@@ -1,0 +1,117 @@
+% CV for Yonghoon Kwon
+% Build with: tectonic src/MY_CV.tex
+% The name and current role appear on the left; contact details appear on the right.
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{microtype}
+
+% ---- CV style ----
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlist[itemize]{itemsep=3pt, topsep=4pt, leftmargin=1.2em}
+\renewcommand{\arraystretch}{1.05}
+
+\definecolor{cvaccent}{HTML}{1F4E79}
+\hypersetup{
+    pdftitle={Yonghoon Kwon - Curriculum Vitae},
+    pdfauthor={Yonghoon Kwon},
+    pageanchor=false,
+    colorlinks=true,
+    urlcolor=cvaccent,
+    linkcolor=cvaccent
+}
+
+\titleformat{\section}{\large\bfseries}{}{0pt}{}[\titlerule]
+\titlespacing*{\section}{0pt}{10pt}{6pt}
+\newcommand{\sectionheading}[1]{\section*{#1}}
+
+% Macro for entries in work experience
+\newcommand{\cventry}[4]{%
+  \begin{tabularx}{\textwidth}{@{}X r@{}}%
+    \textbf{#1} & \textit{#2}\\%
+    \textit{#3} & \\
+  \end{tabularx}%
+  \vspace{2pt}%
+  #4%
+}
+
+\begin{document}
+
+% Header
+\begin{tabularx}{\textwidth}{@{}X r@{}}
+{\Huge\bfseries Yonghoon Kwon} & \href{mailto:yhoon113@gmail.com}{yhoon113@gmail.com}\\
+{\large Research Intern} & \href{https://github.com/kwon13}{github.com/kwon13}\\
+MLAI Lab, Yonsei University & \href{https://linkedin.com/in/yonghoon-kwon-74b72423b/}{linkedin.com/in/yonghoon-kwon-74b72423b/}\\
+& +82\,10\,2257\,3572\\
+\end{tabularx}
+
+\sectionheading{Profile}
+I began my career as an ML Researcher at Glorang at the age of 19 and later worked at Selectstar. I am now a Research Intern at Yonsei University's MLAI Lab, studying self-evolving systems. I explore ``Expansion'', a framework in which AI models learn to redefine and restructure their own task specifications through real-world interactions.
+
+\sectionheading{Research Interests}
+\begin{itemize}
+    \item Small language models and efficient reasoning
+    \item Open-ended self-evolving LLMs
+    \item Meta-learning architectures
+    \item Adaptive evaluation
+\end{itemize}
+
+\sectionheading{Publications}
+\begin{itemize}
+    \item \textbf{Yonghoon Kwon}, Hoyoon Byun, Kyungwoo Song. ``$R_Q$-Evolve: LLMs Evolve Their Own Generator Programs for Self-Improvement.'' \emph{NeurIPS 2026 Workshop on Continual Learning in the Era of Foundation Models and Embodied Agents}.
+    \item \textbf{Yonghoon Kwon}\ (Co-first author), Heondeuk Lee, Barom Kang. ``E-star 12B: Reliable Rubric-Following and Domain-Adaptive SLM Evaluator for Korean Industrial Settings.'' \emph{ACL 2026 Workshop on Generation, Evaluation and Metrics (GEM)}. \href{https://aclanthology.org/2026.gem-main.42/}{Paper}.
+    \item Sunguk Choi, \textbf{Yonghoon Kwon}\ (Co-first author), Heondeuk Lee. ``CAC-CoT: Connector-Aware Compact Chain-of-Thought for Efficient Reasoning Data Synthesis Across Dual-System Cognitive Tasks.'' \emph{EMNLP 2025 Findings}.
+    \item Sunguk Choi, \textbf{Yonghoon Kwon}\ (Co-first author), Dongjin Seo. ``Context- and Alignment-Based Speech--Text Fusion Model for Sentiment Analysis.'' \emph{Proceedings of KCC 2023} (Korean Computer Science Conference).
+\end{itemize}
+
+\newpage
+\sectionheading{Work Experience}
+\cventry{Yonsei University, Seoul, South Korea}{May~2026 -- Present}{Research Intern, MLAI}{%
+\begin{itemize}
+    \item Conducting research on self-improving language models for mathematical reasoning.
+\end{itemize}}
+
+\cventry{Selectstar, Seoul, South Korea}{Jan~2025 -- Apr~2026}{AI Research Engineer (Full-time)}{%
+\begin{itemize}
+    \item Developed a retrieval-augmented generation (RAG) pipeline evaluation model for the financial domain, incorporating long-context understanding, domain-specific training and Reason\,\&\,Score-based assessment; achieved the best performance among internal and open-source baselines.
+    \item Constructed an instruction dataset of 10{,}000 algorithmic and software engineering prompts for SKT's proprietary foundation model.
+\end{itemize}}
+
+\cventry{Glorang, Seoul, South Korea}{Dec~2022 -- May~2024}{ML Research Engineer (Full-time)}{%
+\begin{itemize}
+    \item Proposed and designed novel methodologies in the EduAI domain to enhance learner feedback and personalisation.
+\end{itemize}}
+
+\sectionheading{Skills \& Certifications}
+\begin{itemize}
+    \item \textbf{Programming~\& Tools:} Python, Transformers, PyTorch, DeepSpeed, Git, Docker, Chalice
+    \item \textbf{Certifications:} Google Machine Learning Bootcamp (Cohort~3, Jun~2022); ADSP Big~Data~Analyst
+\end{itemize}
+
+\sectionheading{Awards \& Honors}
+\begin{itemize}
+    \item Bronze Medal, \textit{4th Korean Emotion Recognition Competition}\\
+    Chonnam National University (Oct~2022)
+    \item 3rd Place, \textit{AI Grand Challenge -- Open Track}, AGC (Aug~2023)
+    \item Stage~2 Winner (Policy Support~AI), \textit{AI Grand Challenge}, IITP Director's Award, AGC (Nov~2023)
+\end{itemize}
+
+\sectionheading{Patents}
+\begin{itemize}
+    \item ``Question generation method and server for human performance test using a question--answer network based on a language model.'' Application~No.~10-2023-0088846.
+    \item ``Sampling process for personality tests using a BERT question--answer network representing the respondent population.'' Application~No.~10-2023-0049090.
+\end{itemize}
+
+\end{document}
